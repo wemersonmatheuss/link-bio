@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Bio</title>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="profile">
+                <div class="avatar">
+                    <img src="./img/img-eu.jpeg" alt="@username">
+                </div>
+                <div class="profile-info">
+                    <h1 class="username">@wemerson_dev</h1>
+                    <p class="bio">Desenvolvedor & Empreendedor</p>
+                </div>
+            </div>
+
+            <div class="links">
+                <a href="https://portfolio-nine-sand-69.vercel.app/" class="link-button" target="_blank">
+                    <span class="link-content">
+                        <i class="fas fa-globe icon"></i>
+                        Meu Site Pessoal
+                    </span>
+                    <i class="fas fa-arrow-right external-icon"></i>
+                </a>
+                
+                <a href="http://www.linkedin.com/in/wemerson-matheus" class="link-button" target="_blank">
+                    <span class="link-content">
+                        <i class="fab fa-linkedin icon"></i>
+                        LinkedIn
+                    </span>
+                    <i class="fas fa-arrow-right external-icon"></i>
+                </a>
+                
+                <a href="https://tiktok.com/@wemerson_dev" class="link-button" target="_blank">
+                    <span class="link-content">
+                        <i class="fab fa-tiktok icon"></i>
+                        TikTok
+                    </span>
+                    <i class="fas fa-arrow-right external-icon"></i>
+                </a>
+                
+                <a href="https://wa.me/5581995166980" class="link-button" target="_blank">
+                    <span class="link-content">
+                        <i class="fab fa-whatsapp icon"></i>
+                        WhatsApp
+                    </span>
+                    <i class="fas fa-arrow-right external-icon"></i>
+                </a>
+                
+                <a href="https://instagram.com/wemerson_dev" class="link-button" target="_blank">
+                    <span class="link-content">
+                        <i class="fab fa-instagram icon"></i>
+                        Instagram
+                    </span>
+                    <i class="fas fa-arrow-right external-icon"></i>
+                </a>
+                
+                <a href="mailto:wemersonmthdev@gmail.com" class="link-button" target="_blank">
+                    <span class="link-content">
+                        <i class="fas fa-envelope icon"></i>
+                        Contato
+                    </span>
+                    <i class="fas fa-arrow-right external-icon"></i>
+                </a>
+            </div>
+
+            <footer class="footer">
+                <p>© 2025 • TODOS OS DIREITOS RESERVADOS</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Adiciona efeito de hover nos botões
+        document.querySelectorAll('.link-button').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.querySelector('.external-icon').style.opacity = '1';
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.querySelector('.external-icon').style.opacity = '0';
+            });
+        });
+
+        // Função para adicionar animação de entrada aos elementos
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.querySelector('.card');
+            const avatar = document.querySelector('.avatar');
+            const username = document.querySelector('.username');
+            const links = document.querySelectorAll('.link-button');
+            
+            // Definir opacidade inicial como 0
+            card.style.opacity = '0';
+            avatar.style.opacity = '0';
+            username.style.opacity = '0';
+            links.forEach(link => link.style.opacity = '0');
+            
+            // Animar entrada com delay
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    avatar.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    avatar.style.opacity = '1';
+                    avatar.style.transform = 'scale(1)';
+                    
+                    setTimeout(() => {
+                        username.style.transition = 'opacity 0.5s ease';
+                        username.style.opacity = '1';
+                        
+                        // Animar links um por um
+                        links.forEach((link, index) => {
+                            setTimeout(() => {
+                                link.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                                link.style.opacity = '1';
+                                link.style.transform = 'translateX(0)';
+                            }, 100 * index);
+                        });
+                    }, 200);
+                }, 200);
+            }, 300);
+        });
+    </script>
+</body>
+</html>
