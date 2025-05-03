@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     
+    
 </head>
 <body>
     <div class="container">
@@ -29,14 +30,16 @@
                         Meu Site Pessoal
                     </span>
                     <i class="fas fa-arrow-right external-icon"></i>
+                    <span class="touch-effect"></span>
                 </a>
                 
-                <a href="http://www.linkedin.com/in/wemerson-matheus" class="link-button" target="_blank">
+                <a href="https://linkedin.com/in/wemerson-matheus" class="link-button" target="_blank">
                     <span class="link-content">
                         <i class="fab fa-linkedin icon"></i>
                         LinkedIn
                     </span>
                     <i class="fas fa-arrow-right external-icon"></i>
+                    <span class="touch-effect"></span>
                 </a>
                 
                 <a href="https://tiktok.com/@wemerson_dev" class="link-button" target="_blank">
@@ -45,6 +48,7 @@
                         TikTok
                     </span>
                     <i class="fas fa-arrow-right external-icon"></i>
+                    <span class="touch-effect"></span>
                 </a>
                 
                 <a href="https://wa.me/5581995166980" class="link-button" target="_blank">
@@ -53,6 +57,7 @@
                         WhatsApp
                     </span>
                     <i class="fas fa-arrow-right external-icon"></i>
+                    <span class="touch-effect"></span>
                 </a>
                 
                 <a href="https://instagram.com/wemerson_dev" class="link-button" target="_blank">
@@ -61,6 +66,7 @@
                         Instagram
                     </span>
                     <i class="fas fa-arrow-right external-icon"></i>
+                    <span class="touch-effect"></span>
                 </a>
                 
                 <a href="mailto:wemersonmthdev@gmail.com" class="link-button" target="_blank">
@@ -69,39 +75,85 @@
                         Contato
                     </span>
                     <i class="fas fa-arrow-right external-icon"></i>
+                    <span class="touch-effect"></span>
                 </a>
             </div>
 
             <footer class="footer">
-                <p>© 2025 • TODOS OS DIREITOS RESERVADOS</p>
+                <p>© 2024 • TODOS OS DIREITOS RESERVADOS</p>
             </footer>
         </div>
     </div>
 
     <script>
-        // Adiciona efeito de hover nos botões
-        document.querySelectorAll('.link-button').forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                button.querySelector('.external-icon').style.opacity = '1';
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                button.querySelector('.external-icon').style.opacity = '0';
-            });
-        });
-
-        // Função para adicionar animação de entrada aos elementos
         document.addEventListener('DOMContentLoaded', () => {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                             (window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
+            
+            const links = document.querySelectorAll('.link-button');
+            
+            // Função para criar efeito de ripple ao tocar
+            function createRippleEffect(event) {
+                const button = event.currentTarget;
+                const ripple = button.querySelector('.touch-effect');
+                
+                // Resetar animação
+                ripple.style.animation = 'none';
+                
+                // Forçar reflow
+                void ripple.offsetWidth;
+                
+                // Iniciar nova animação
+                ripple.style.animation = 'ripple 0.6s linear';
+                
+                // Adicionar classe active temporariamente
+                button.classList.add('active');
+                
+                // Remover classe active após um tempo
+                setTimeout(() => {
+                    button.classList.remove('active');
+                }, 300);
+            }
+            
+            // Configurar eventos para cada botão
+            links.forEach(button => {
+                // Para dispositivos móveis
+                if (isMobile) {
+                    // Mostrar sempre os ícones em dispositivos móveis
+                    button.querySelector('.external-icon').style.opacity = '1';
+                    button.querySelector('.external-icon').style.transform = 'translateX(0)';
+                    
+                    // Adicionar efeito de toque
+                    button.addEventListener('touchstart', createRippleEffect);
+                } else {
+                    // Para desktop - comportamento normal de hover
+                    button.addEventListener('mouseenter', () => {
+                        button.querySelector('.external-icon').style.opacity = '1';
+                        button.querySelector('.external-icon').style.transform = 'translateX(0)';
+                    });
+                    
+                    button.addEventListener('mouseleave', () => {
+                        button.querySelector('.external-icon').style.opacity = '0';
+                        button.querySelector('.external-icon').style.transform = 'translateX(-10px)';
+                    });
+                }
+            });
+
+            // Animações de entrada
             const card = document.querySelector('.card');
             const avatar = document.querySelector('.avatar');
             const username = document.querySelector('.username');
-            const links = document.querySelectorAll('.link-button');
             
             // Definir opacidade inicial como 0
             card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
             avatar.style.opacity = '0';
+            avatar.style.transform = 'scale(0.9)';
             username.style.opacity = '0';
-            links.forEach(link => link.style.opacity = '0');
+            links.forEach(link => {
+                link.style.opacity = '0';
+                link.style.transform = 'translateX(-20px)';
+            });
             
             // Animar entrada com delay
             setTimeout(() => {
